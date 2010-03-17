@@ -45,13 +45,13 @@ namespace casock {
   namespace base {
     const ssize_t Communicator::read (char* buffer, const size_t& len)
     {
-      LOGMSG (LOW_LEVEL, "Communicator::%s () - len [%Zu]\n", __FUNCTION__, len);
+      LOGMSG (HIGH_LEVEL, "Communicator::%s () - len [%Zu]\n", __FUNCTION__, len);
       return mpFD->read (buffer, len);
     }
 
     const ssize_t Communicator::read (stringstream& buffer)
     {
-      LOGMSG (LOW_LEVEL, "Communicator::%s ()\n", __FUNCTION__);
+      LOGMSG (HIGH_LEVEL, "Communicator::%s ()\n", __FUNCTION__);
 
       ssize_t received = 0;
 
