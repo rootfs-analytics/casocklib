@@ -38,6 +38,7 @@
 
 #include "casock/base/CASException.h"
 #include "casock/util/SafeLock.h"
+#include "casock/util/Logger.h"
 
 namespace casock {
   namespace base {
@@ -50,18 +51,22 @@ namespace casock {
     void FileDescriptor::write (const char* buff, const size_t& len) const
     {
       casock::util::SafeLock lock (*this);
+      LOGMSG (LOW_LEVEL, "FileDescriptor::%s () - len [%zu]\n", __FUNCTION__, len);
       ::write (m_fd, buff, len);
     }
 
     const ssize_t FileDescriptor::read (char* buff, const size_t& len) const
     {
       casock::util::SafeLock lock (*this);
-      return ::read (m_fd, buff, len);
+      ssize_t s = ::read (m_fd, buff, len);
+      LOGMSG (LOW_LEVEL, "FileDescriptor::%s () - len [%zu], s [%zd]\n", __FUNCTION__, len, s);
+      return s;
     }
 
     void FileDescriptor::close () const
     {
       casock::util::SafeLock lock (*this);
+      LOGMSG (LOW_LEVEL, "FileDescriptor::%s ()\n", __FUNCTION__);
       ::close (m_fd);
     }
   }
